@@ -7,14 +7,14 @@ class MySecondRoute extends StatefulWidget {
 }
 
 class SecondRoute extends State<MySecondRoute> {
-  final controller_number = TextEditingController();
-  final my_form_key = GlobalKey<FormState>();
+  final controllerNumber = TextEditingController();
+  final myFormKey = GlobalKey<FormState>();
 
   String textToShow = "";
 
-  void KmToMiles() {
-    if (my_form_key.currentState.validate()) {
-      double number = double.parse(controller_number.text);
+  void kmToMiles() {
+    if (myFormKey.currentState.validate()) {
+      double number = double.parse(controllerNumber.text);
       double result = number * 1.60934;
       result.toString();
       setState(() {
@@ -22,9 +22,10 @@ class SecondRoute extends State<MySecondRoute> {
       });
     }
   }
-  void MilesToKm() {
-    if (my_form_key.currentState.validate()) {
-      double number = double.parse(controller_number.text);
+
+  void milesToKm() {
+    if (myFormKey.currentState.validate()) {
+      double number = double.parse(controllerNumber.text);
       double result = number * 0.621371;
       result.toString();
       setState(() {
@@ -40,40 +41,36 @@ class SecondRoute extends State<MySecondRoute> {
         title: Text("Km to miles converter"),
       ),
       body: Form(
-          key: my_form_key,
-          child: Column (
+          key: myFormKey,
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              TextFormField(controller: controller_number,
+              TextFormField(
+                  controller: controllerNumber,
                   validator: (value) {
                     if (value.isEmpty) return "Please enter number";
                   },
                   decoration: InputDecoration(hintText: "Enter number"),
                   keyboardType: TextInputType.number),
-              Text( textToShow,
-                style: TextStyle(fontSize: 20.0),),
+              Text(
+                textToShow,
+                style: TextStyle(fontSize: 20.0),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  RaisedButton(
-                    onPressed: KmToMiles,
+                  ElevatedButton(
+                    onPressed: kmToMiles,
                     child: Text('km/miles'),
                   ),
-                  RaisedButton(
-                    onPressed: MilesToKm,
+                  ElevatedButton(
+                    onPressed: milesToKm,
                     child: Text('miles/km'),
-                  ),
-                  RaisedButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text("Back to simple calculator")
                   )
                 ],
               )
             ],
-          )
-      ),
+          )),
     );
   }
 }

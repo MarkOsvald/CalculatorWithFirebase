@@ -11,7 +11,8 @@ class HistoryPage extends StatelessWidget {
         title: Text("Previous Calculations"),
       ),
       body: StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('calculations').snapshots(),
+        stream:
+            FirebaseFirestore.instance.collection('calculations').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) {
             return Center(
@@ -21,8 +22,10 @@ class HistoryPage extends StatelessWidget {
           return ListView(
             children: snapshot.data.docs.map((document) {
               return Container(
-                child:
-                Center(child: Text(document['equation'],)),
+                child: Center(
+                    child: Text(
+                  document['equation'],
+                )),
               );
             }).toList(),
           );
